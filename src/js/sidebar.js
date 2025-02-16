@@ -1,15 +1,26 @@
-const sidebar = document.getElementById('sidebar');
-const toggleBtn = document.getElementById('toggleBtn');
-const mainContent = document.querySelector('.main-content');
+document.addEventListener("DOMContentLoaded", function () {
+    // Prevent multiple declarations
+    if (window.sidebarInitialized) return;
+    window.sidebarInitialized = true;
 
-toggleBtn.addEventListener('click', () => {
-    sidebar.classList.toggle('show');
-    mainContent.classList.toggle('shifted');
+    console.log("Sidebar script is running!");
 
-    // Move the toggle button inside the sidebar when opened
-    if (sidebar.classList.contains('show')) {
-        toggleBtn.style.left = "265px"; // Inside the sidebar
-    } else {
-        toggleBtn.style.left = "15px"; // Back to normal position
+    const sidebar = document.getElementById("sidebar");
+    const toggleBtn = document.getElementById("toggleBtn");
+    const mainContent = document.querySelector(".main-content");
+
+    if (!sidebar || !toggleBtn) {
+        console.error("Sidebar or Toggle Button not found in the document.");
+        return;
     }
+
+    toggleBtn.addEventListener("click", function () {
+        sidebar.classList.toggle("show");
+        mainContent?.classList.toggle("shifted");
+
+        // Move the toggle button inside the sidebar when opened
+        toggleBtn.style.left = sidebar.classList.contains("show") ? "265px" : "15px";
+    });
+
+    console.log("Sidebar initialized successfully.");
 });
